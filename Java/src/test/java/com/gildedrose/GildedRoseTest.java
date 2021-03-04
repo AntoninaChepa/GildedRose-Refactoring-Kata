@@ -36,10 +36,18 @@ class GildedRoseTest {
     }
 
     @Test
-    void agedBrieAumentaQualita() {
+    void agedBrie_AumentaQualitaInveceDiDiminuire() {
         GildedRose app = appWithItem("Aged Brie", 8, 10);
         app.updateQuality();
         assertEquals(11, app.items[0].quality);
+    }
+
+    @Test
+    void agedBrie_NonVaMaiOltreQualita50() {
+        GildedRose app = appWithItem("Aged Brie", 8, 50);
+        app.updateQuality();
+        assertEquals(7, app.items[0].sellIn);
+        assertEquals(50, app.items[0].quality);
     }
 
     private GildedRose appWithItem(String name, int sellIn, int quality) {
