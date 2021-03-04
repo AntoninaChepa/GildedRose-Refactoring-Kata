@@ -16,7 +16,6 @@ class GildedRoseTest {
 
 //    All items have a SellIn value which denotes the number of days we have to sell the item
 //	- All items have a Quality value which denotes how valuable the item is
-//    - Once the sell by date has passed, Quality degrades twice as fast
 //	- "Aged Brie" actually increases in Quality the older it gets
 //	- The Quality of an item is never more than 50
 //            - "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
@@ -34,6 +33,13 @@ class GildedRoseTest {
         GildedRose app = appWithItem("genericItem", 0, 8);
         app.updateQuality();
         assertEquals(6, app.items[0].quality);
+    }
+
+    @Test
+    void agedBrieAumentaQualita() {
+        GildedRose app = appWithItem("Aged Brie", 8, 10);
+        app.updateQuality();
+        assertEquals(11, app.items[0].quality);
     }
 
     private GildedRose appWithItem(String name, int sellIn, int quality) {
