@@ -13,5 +13,4 @@ class GildedRoseTest {
         app.updateQuality();
         assertEquals("fixme", app.items[0].name);
     }
-
 }
