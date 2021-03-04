@@ -29,6 +29,12 @@ class GildedRoseTest {
         assertEquals(0, app.items[0].quality);
     }
 
+    @Test
+    void sellInSuperato() {
+        GildedRose app = appWithItem("genericItem", 0, 8);
+        app.updateQuality();
+        assertEquals(6, app.items[0].quality);
+    }
 
     private GildedRose appWithItem(String name, int sellIn, int quality) {
         Item[] items = new Item[]{new Item(name, sellIn, quality)};
