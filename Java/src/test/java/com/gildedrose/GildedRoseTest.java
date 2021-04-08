@@ -54,6 +54,30 @@ class GildedRoseTest {
     }
 
     @Test
+    void agedBrie_raggiungeSellInConQualitaQuasiMassima() {
+        GildedRose app = appWithItem("Aged Brie", 0, 49);
+        app.updateQuality();
+        assertEquals(-1, app.items[0].sellIn);
+        assertEquals(50, app.items[0].quality);
+    }
+
+    @Test
+    void agedBrie_raggiungeSellInConQualitaQuasiMassimaMaNonMassima() {
+        GildedRose app = appWithItem("Aged Brie", 0, 48);
+        app.updateQuality();
+        assertEquals(-1, app.items[0].sellIn);
+        assertEquals(50, app.items[0].quality);
+    }
+
+    @Test
+    void agedBrie_aumentaLaQualitaDi2QuandoSuperaLaDataDiScadenza() {
+        GildedRose app = appWithItem("Aged Brie", 1, 10);
+        app.updateQuality();
+        assertEquals(0, app.items[0].sellIn);
+        assertEquals(12, app.items[0].quality);
+    }
+
+    @Test
     void sulfuras_NonDegradaMaiLaQualita() {
         GildedRose app = appWithItem("Sulfuras, Hand of Ragnaros", 10, 80);
         app.updateQuality();
