@@ -61,6 +61,23 @@ class GildedRoseTest {
         assertEquals(80, app.items[0].quality);
     }
 
+
+    @Test
+    void backstage_la_qualita_non_supera_50_con_data_scadenza_minore_di_11() {
+        GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", 10, 49);
+        app.updateQuality();
+        assertEquals(9, app.items[0].sellIn);
+        assertEquals(50, app.items[0].quality);
+    }
+
+    @Test
+    void backstage_la_qualita_non_supera_50_con_data_scadenza_minore_di_5() {
+        GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", 5, 49);
+        app.updateQuality();
+        assertEquals(4, app.items[0].sellIn);
+        assertEquals(50, app.items[0].quality);
+    }
+
     @Test
     void backstage_la_qualita_aumenta_di_1_se_giorni_piu_di_10() {
         GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", 11, 20);
