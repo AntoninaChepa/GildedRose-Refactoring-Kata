@@ -21,6 +21,8 @@ class GildedRoseTest {
 //            - "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
 //	- "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
 
+
+
     @Test
     void controllaQualitaNonNegativa() {
         GildedRose app = appWithItem("genericItem", 10, 0);
@@ -29,7 +31,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void sellInSuperato() {
+    void quandoDataDiVenditaScadutaLaQualitaDegradaAlDoppioDellaVelocita() {
         GildedRose app = appWithItem("genericItem", 0, 8);
         app.updateQuality();
         assertEquals(6, app.items[0].quality);
@@ -48,6 +50,14 @@ class GildedRoseTest {
         app.updateQuality();
         assertEquals(7, app.items[0].sellIn);
         assertEquals(50, app.items[0].quality);
+    }
+
+    @Test
+    void sulfuras_NonDegradaMaiLaQualita() {
+        GildedRose app = appWithItem("Sulfuras, Hand of Ragnaros", 10, 80);
+        app.updateQuality();
+        assertEquals(10, app.items[0].sellIn);
+        assertEquals(80, app.items[0].quality);
     }
 
     private GildedRose appWithItem(String name, int sellIn, int quality) {
