@@ -62,7 +62,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void backstage_degrada_di_1_se_giorni_piu_di_10() {
+    void backstage_la_qualita_aumenta_di_1_se_giorni_piu_di_10() {
         GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", 11, 20);
         app.updateQuality();
         assertEquals(10, app.items[0].sellIn);
@@ -70,20 +70,30 @@ class GildedRoseTest {
     }
 
     @Test
-    void backstage_degrada_di_1_se_giorni_10() {
+    void backstage_la_qualita_aumenta_di_2_se_giorni_10() {
         GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", 10, 20);
         app.updateQuality();
         assertEquals(9, app.items[0].sellIn);
         assertEquals(22, app.items[0].quality);
     }
+
     @Test
-    void backstage_degrada_di_1_se_giorni_meno_di_5 () {
-        GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", 5, 20);
+    void backstage_la_qualita_aumenta_di_3_se_giorni_meno_di_5() {
+        int quality = 20;
+        int sellIn = 5;
+        GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
         app.updateQuality();
-        assertEquals(4, app.items[0].sellIn);
-        assertEquals(23, app.items[0].quality);
+        assertEquals(sellIn - 1, app.items[0].sellIn);
+        assertEquals(quality + 3, app.items[0].quality);
     }
 
+    @Test
+    void backstage_crolla_la_qualita_a_0_se_data_scadenza_superata() {
+        GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", 0, 20);
+        app.updateQuality();
+        assertEquals(-1, app.items[0].sellIn);
+        assertEquals(0, app.items[0].quality);
+    }
 
 
     private GildedRose appWithItem(String name, int sellIn, int quality) {
