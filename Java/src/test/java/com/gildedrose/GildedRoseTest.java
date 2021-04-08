@@ -24,7 +24,6 @@ class GildedRoseTest {
 //    Quality drops to 0 after the concert
 
 
-
     @Test
     void controllaQualitaNonNegativa() {
         GildedRose app = appWithItem("genericItem", 10, 0);
@@ -62,8 +61,35 @@ class GildedRoseTest {
         assertEquals(80, app.items[0].quality);
     }
 
+    @Test
+    void backstage_degrada_di_1_se_giorni_piu_di_10() {
+        GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", 11, 20);
+        app.updateQuality();
+        assertEquals(10, app.items[0].sellIn);
+        assertEquals(21, app.items[0].quality);
+    }
+
+    @Test
+    void backstage_degrada_di_1_se_giorni_10() {
+        GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", 10, 20);
+        app.updateQuality();
+        assertEquals(9, app.items[0].sellIn);
+        assertEquals(22, app.items[0].quality);
+    }
+    @Test
+    void backstage_degrada_di_1_se_giorni_meno_di_5 () {
+        GildedRose app = appWithItem("Backstage passes to a TAFKAL80ETC concert", 5, 20);
+        app.updateQuality();
+        assertEquals(4, app.items[0].sellIn);
+        assertEquals(23, app.items[0].quality);
+    }
+
+
+
     private GildedRose appWithItem(String name, int sellIn, int quality) {
         Item[] items = new Item[]{new Item(name, sellIn, quality)};
         return new GildedRose(items);
     }
 }
+
+
