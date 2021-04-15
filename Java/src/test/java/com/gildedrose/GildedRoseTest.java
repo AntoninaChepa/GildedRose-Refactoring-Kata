@@ -15,6 +15,7 @@ class GildedRoseTest {
         assertEquals(8, app.items[0].quality);
     }
 
+
 //    All items have a SellIn value which denotes the number of days we have to sell the item
 //	- All items have a Quality value which denotes how valuable the item is
 //	- "Aged Brie" actually increases in Quality the older it gets
