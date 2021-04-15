@@ -101,7 +101,6 @@ class GildedRoseTest {
     }
 
     @Test
-    @Disabled
     void conjured_perdeQualitaAlDoppioDellaVelocitaRispettoAlNormale() {
         GildedRose app = appWithItem("Conjured", 10, 10);
         app.updateQuality();
@@ -110,12 +109,18 @@ class GildedRoseTest {
     }
 
     @Test
-    @Disabled
     void conjured_degradaAlDoppioDellaSuaVelocitaDopoLaScadenza() {
         GildedRose app = appWithItem("Conjured", 0, 10);
         app.updateQuality();
         assertEquals(-1, app.items[0].sellIn);
         assertEquals(6, app.items[0].quality);
+    }
+    @Test
+    void conjured_qualitaZeroNonDegradaUlteriormente() {
+        GildedRose app = appWithItem("Conjured", 5, 0);
+        app.updateQuality();
+        assertEquals(4, app.items[0].sellIn);
+        assertEquals(0, app.items[0].quality);
     }
 
     @Test
