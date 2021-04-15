@@ -39,6 +39,13 @@ class GildedRoseTest {
     }
 
     @Test
+    void qualitaMaiNegativa() {
+        GildedRose app = appWithItem("genericItem", -1, 0);
+        app.updateQuality();
+        assertEquals(0, app.items[0].quality);
+    }
+
+    @Test
     void agedBrie_AumentaQualitaInveceDiDiminuire() {
         GildedRose app = appWithItem("Aged Brie", 8, 10);
         app.updateQuality();
