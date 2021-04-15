@@ -40,7 +40,7 @@ class GildedRoseTest {
 
     @Test
     void qualitaMaiNegativa() {
-        GildedRose app = appWithItem("genericItem", -1, 0);
+        GildedRose app = appWithItem("genericItem", -1, 1);
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
     }
@@ -92,6 +92,12 @@ class GildedRoseTest {
         assertEquals(80, app.items[0].quality);
     }
 
+    @Test
+    void sulfuras_quandoNon80NonPerdeQualita() {
+        GildedRose app = appWithItem("Sulfuras, Hand of Ragnaros", -1, 10);
+        app.updateQuality();
+        assertEquals(10, app.items[0].quality);
+    }
 
     @Test
     void backstage_la_qualita_non_supera_50_con_data_scadenza_minore_di_11() {
