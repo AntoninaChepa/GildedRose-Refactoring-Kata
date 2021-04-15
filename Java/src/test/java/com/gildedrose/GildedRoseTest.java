@@ -71,9 +71,9 @@ class GildedRoseTest {
 
     @Test
     void agedBrie_aumentaLaQualitaDi2QuandoSuperaLaDataDiScadenza() {
-        GildedRose app = appWithItem("Aged Brie", 1, 10);
+        GildedRose app = appWithItem("Aged Brie", 0, 10);
         app.updateQuality();
-        assertEquals(0, app.items[0].sellIn);
+        assertEquals(-1, app.items[0].sellIn);
         assertEquals(12, app.items[0].quality);
     }
 
