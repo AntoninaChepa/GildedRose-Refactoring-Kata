@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -97,6 +98,24 @@ class GildedRoseTest {
         GildedRose app = appWithItem("Sulfuras, Hand of Ragnaros", -1, 10);
         app.updateQuality();
         assertEquals(10, app.items[0].quality);
+    }
+
+    @Test
+    @Disabled
+    void conjured_perdeQualitaAlDoppioDellaVelocitaRispettoAlNormale() {
+        GildedRose app = appWithItem("Conjured", 10, 10);
+        app.updateQuality();
+        assertEquals(9, app.items[0].sellIn);
+        assertEquals(8, app.items[0].quality);
+    }
+
+    @Test
+    @Disabled
+    void conjured_degradaAlDoppioDellaSuaVelocitaDopoLaScadenza() {
+        GildedRose app = appWithItem("Conjured", 0, 10);
+        app.updateQuality();
+        assertEquals(-1, app.items[0].sellIn);
+        assertEquals(6, app.items[0].quality);
     }
 
     @Test
